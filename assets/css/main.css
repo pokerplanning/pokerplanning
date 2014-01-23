@@ -1,0 +1,141 @@
+@import url(http://fonts.googleapis.com/css?family=Inika:400,700);
+@import url(http://fonts.googleapis.com/css?family=Stardos+Stencil:700);
+
+html {
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inika;
+}
+
+hr {
+    border: none;
+    border-top: 1px dashed black;
+    color: transparent;
+    background-color: transparent;
+    height: 1px;
+    margin: 5px 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.mike-container {
+    position: relative;
+    background-image: -webkit-linear-gradient(top left, #ebfeff 0%, #ffffff 100%);
+}
+
+.content-container {
+    position: relative;
+    z-index: 10;
+    margin-right: 550px;
+    height: 540px;
+    text-align: center;
+    padding: 50px 10px 10px 10px;
+}
+
+.mike-image {
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.mike-bubble {
+    position: absolute;
+    width: 200px;
+    right: -100px;
+    top: 50px;
+}
+
+.rectangle-speech-border {
+    height: 160px;
+}
+
+.rectangle-speech-border p {
+    margin: 0;
+}
+
+.mike-score {
+    font-family: 'Stardos Stencil', cursive;
+}
+
+.mike-heard {
+    transform: rotate(-2deg);
+    -ms-transform: rotate(-2deg); /* IE 9 */
+    -webkit-transform: rotate(-2deg); /* Safari and Chrome */
+
+    background-image: -webkit-linear-gradient(top left, #e0e0e4 0%, #f4f4f9 100%);
+    padding: 0 20px;
+    text-align: left;
+    position: absolute;
+    bottom: 20px;
+    width: 85%;
+}
+
+.mike-heard h2 {
+    margin-bottom: 5px;
+}
+
+.mike-heard dt {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.button {
+    -webkit-border-top-left-radius:20px;
+    -moz-border-radius-topleft:20px;
+    border-top-left-radius:20px;
+    -webkit-border-top-right-radius:20px;
+    -moz-border-radius-topright:20px;
+    border-top-right-radius:20px;
+    -webkit-border-bottom-right-radius:20px;
+    -moz-border-radius-bottomright:20px;
+    border-bottom-right-radius:20px;
+    -webkit-border-bottom-left-radius:20px;
+    -moz-border-radius-bottomleft:20px;
+    border-bottom-left-radius:20px;
+    text-indent:0;
+    display:inline-block;
+    font-family:Arial;
+    font-weight:bold;
+    font-style:normal;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #810e05;
+    border:1px solid #d02718;
+    color:#ffffff;
+    -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+    box-shadow:inset 0px 1px 0px 0px #f5978e;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+    background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+    background-color:#f24537;
+}
+
+.button:hover {
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
+    background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
+    background-color:#c62d1f;
+}
+
+.ask-button {
+    font-size:35px;
+    line-height:70px;
+    height:75px;
+    width:200px;
+}
+
+.ask-again-button {
+    position: absolute;
+    top: 130px;
+    right: 230px;
+    font-size:25px;
+    line-height:60px;
+    height:60px;
+    width:250px;
+}
