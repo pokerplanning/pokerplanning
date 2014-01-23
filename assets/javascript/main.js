@@ -123,12 +123,34 @@ $(function () {
         $('#ask-mike-button').fadeOut();
         $('#score-content').fadeIn();
         pickRandom();
+
+        $('#mike-head').playKeyframe(
+            'trapdoor-sequence 500 linear 0 infinite normal forwards'
+        );
     });
 
     $('#retry-button').click(function () {
         $('#score-content').fadeOut();
         $('#ask-mike-button').fadeIn();
     });
+
+    $.keyframe.define([{
+        name: 'trapdoor-sequence',
+        '0%': {
+            'bottom': '349px'
+        },
+        '33%': {
+            'bottom': '359px',
+            'transform': 'rotate(-7deg)'
+        },
+        '66%': {
+            'bottom': '350px',
+            'transform': 'rotate(2deg)'
+        },
+        '100%': {
+            'bottom': '349px'
+        }
+    }]);
 });
 
 function pickRandom () {

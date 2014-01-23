@@ -38,7 +38,14 @@ hr {
     padding: 50px 10px 10px 10px;
 }
 
-.mike-image {
+.mike-image-head {
+    z-index: 100;
+    position: absolute;
+    right: 212px;
+    bottom: 349px;
+}
+
+.mike-image-body {
     z-index: 100;
     position: absolute;
     right: 0;
