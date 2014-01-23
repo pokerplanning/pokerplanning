@@ -127,11 +127,15 @@ $(function () {
         $('#mike-head').playKeyframe(
             'trapdoor-sequence 500 linear 0 infinite normal forwards'
         );
+
+        return false;
     });
 
     $('#retry-button').click(function () {
         $('#score-content').fadeOut();
         $('#ask-mike-button').fadeIn();
+
+        return false;
     });
 
     $.keyframe.define([{
