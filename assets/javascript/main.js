@@ -22,7 +22,7 @@ var scores = {
         'quotes' : [
             {
                 'dev' : '"Just a case of munging some data."',
-                'po'  : '"I love this team. It really isn"t true what everyone says about them."'
+                'po'  : '"I love this team. It really isn\'t true what everyone says about them."'
             },
             {
                 'dev' : '"Done. Move on."',
@@ -41,8 +41,8 @@ var scores = {
                 'po'  : '"I wonder when the greedy b*****s are going to ask me to buy food again?"'
             },
             {
-                'dev' : '"I wish I"d not had those beers last night. At least nobody has noticed."',
-                'po'  : '"Wow, he looks awful " and he stinks of beer. Let"s get this done as quickly as possible."'
+                'dev' : '"I wish I\'d not had those beers last night. At least nobody has noticed."',
+                'po'  : '"Wow, he looks awful - and he stinks of beer. Let\'s get this done as quickly as possible."'
             },
             {
                 'dev' : '"Seems straightforward but time-consuming. Maybe that\'s one for the new guy."',
@@ -82,10 +82,10 @@ var scores = {
         'quotes' : [
             {
                 'dev' : '"A bit big, but not worth splitting."',
-                'po'  : '"Hmm, I don"t think it"s that big, but I better not challenge another estimate."'
+                'po'  : '"Hmm, I don\'t think it\'s that big, but I better not challenge another estimate."'
             },
             {
-                'dev' : '"I hope I don"t end up with that story."',
+                'dev' : '"I hope I don\'t end up with that story."',
                 'po'  : '"The business is gonna be so happy when that one goes live."'
             },
             {
@@ -228,10 +228,9 @@ function playSpeech (score) {
         'speech 1000 linear 0 infinite normal forwards'
     );
 
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'assets/sound/' + score + '_' + randomSpeech + '.mp3');
-    audioElement.setAttribute('autoplay', 'autoplay');
-    console.log('playing sound: assets/sound/' + score + '_' + randomSpeech + '.mp3');
+    var soundURI = 'assets/sound/' + score + '_' + randomSpeech + '.mp3';
+    playSound(soundURI);
+    console.log('playing sound: ' + soundURI);
 
     setTimeout(function () { $('#mike-head').resetKeyframe() }, scores[ score ].speech[ randomSpeech ]);
 }
@@ -294,6 +293,17 @@ function advanceScore (index, finalNumber, distance) {
         $('#mike-heard-devs').html( heard.dev );
         $('#mike-heard-po').html( heard.po );
 
+        var angle = 0 - 2 + Math.random() * 4;
+        $.keyframe.define([{
+            name: 'note',
+            '100%': { 'transform': 'rotate(0deg)' },
+            '100%': { 'transform': 'rotate(' + angle + 'deg)' },
+        }]);
+
+        $('#mike-heard').playKeyframe(
+            'note 2000 linear 0 1 normal forwards'
+        );
+
         $('#mike-heard').fadeIn('slow');
 
         setTimeout(function () { $('#retry-button').fadeIn('slow') }, 1000);
@@ -307,3 +317,26 @@ function pickRandomElementOfArray (array) {
 function pickRandomIndexOfArray (array) {
     return Math.round(Math.random() * (array.length - 1))
 }
+
+function html5Audio(){
+    var a = document.createElement('audio');
+    return !!(a.canPlayType && a.canPlayType('audio/mpeg;').replace(/no/, ''));
+}
+
+function playSound(url){
+    if (html5Audio){
+        var snd = new Audio(url);
+        snd.load();
+        snd.play();
+    }
+    else {
+        $("#sound").remove();
+        var sound = $("<embed id='sound' type='audio/mpeg' />");
+        sound.attr('src', url);
+        sound.attr('loop', false);
+        sound.attr('hidden', true);
+        sound.attr('autostart', true);
+        $('body').append(sound);
+    }
+}
+

@@ -43,6 +43,10 @@ hr {
     margin: 35px auto 0 auto;
 }
 
+.home-section hr {
+    margin-bottom: 15px;
+}
+
 .mike-image-head {
     z-index: 100;
     position: absolute;
@@ -77,11 +81,7 @@ hr {
 }
 
 .mike-heard {
-    transform: rotate(-2deg);
-    -ms-transform: rotate(-2deg); /* IE 9 */
-    -webkit-transform: rotate(-2deg); /* Safari and Chrome */
-
-    background-image: -webkit-linear-gradient(top left, #e0e0e4 0%, #f4f4f9 100%);
+    background-image: -webkit-linear-gradient(top left, #f8f8d0 0%, #f0f0c0 100%);
     padding: 0 20px;
     text-align: left;
     position: absolute;
@@ -101,12 +101,15 @@ hr {
 
 .footer {
     text-align: center;
-    padding-top: 15px;
     color: white;
 }
 
 .nap-logo {
-    margin: 0 0 -2px 15px;
+    margin: 0 15px -2px 15px;
+}
+
+.footer small {
+    color: #ccc;
 }
 
 .button {
