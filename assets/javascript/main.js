@@ -339,13 +339,12 @@ function playSound(url){
     if (html5Audio){
         console.log('using html5 audio');
         var snd = new Audio(url);
-        snd.onplaying = function () {
+        snd.play();
+        snd.addEventListener('canplay', function () {
             $('#mike-head').playKeyframe(
                 'speech 1000 linear 0 infinite normal forwards'
             );
-        };
-        snd.load();
-        snd.play();
+        }, false);
     }
     else {
         console.log('using embed tag for audio');
