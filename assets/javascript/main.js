@@ -13,7 +13,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2000
         ]
     },
     '2' : {
@@ -28,7 +28,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2000
         ]
     },
     '3' : {
@@ -47,7 +47,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            1500, 3000
         ]
     },
     '5' : {
@@ -70,7 +70,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2000, 4000
         ]
     },
     '8' : {
@@ -89,7 +89,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2500, 3000
         ]
     },
     '13' : {
@@ -104,7 +104,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2000
         ]
     },
     '20' : {
@@ -119,10 +119,10 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            4000
         ]
     },
-    '?' : {
+    'question' : {
         'quotes' : [
             {
                 'dev' : '"What is the PO talking about? Right, stop thinking about Star Wars and concentrate."',
@@ -134,10 +134,10 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            2500
         ]
     },
-    'COFFEE' : {
+    'coffee' : {
         'quotes' : [
             {
                 'dev' : '"Pleeeeease let me out of this room!!!!!"',
@@ -164,7 +164,7 @@ $(function () {
     $('#ask-mike-button').click(function () {
         $('#mike-heard').hide();
         $('#retry-button').hide();
-        $('#ask-mike-button').fadeOut();
+        $('#home-content').fadeOut();
         $('#score-content').fadeIn();
         var chosenOption = pickRandom();
         playSpeech(chosenOption);
@@ -174,7 +174,7 @@ $(function () {
 
     $('#retry-button').click(function () {
         $('#score-content').fadeOut();
-        $('#ask-mike-button').fadeIn();
+        $('#home-content').fadeIn();
 
         return false;
     });
@@ -211,17 +211,22 @@ $(function () {
 });
 
 function playSpeech (score) {
-    var randomSpeech = pickRandomElementOfArray(scores[ score ].speech);
+    var randomSpeech = pickRandomIndexOfArray(scores[ score ].speech);
 
     $('#mike-head').playKeyframe(
         'speech 1000 linear 0 infinite normal forwards'
     );
 
-    setTimeout(function () { $('#mike-head').resetKeyframe() }, randomSpeech);
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'assets/sound/' + score + '_' + randomSpeech + '.mp3');
+    audioElement.setAttribute('autoplay', 'autoplay');
+    console.log('assets/sound/' + score + '_' + randomSpeech + '.mp3');
+
+    setTimeout(function () { $('#mike-head').resetKeyframe() }, scores[ score ].speech[ randomSpeech ]);
 }
 
 function pickRandom () {
-    var randomScore = pickRandomElementOfArray(scores.keys);
+    var randomScore = pickRandomElementOfArray( Object.keys(scores) );
 
     setTimeout(function () { advanceScore(0, randomScore, 0.05) }, scoreDelay);
 
@@ -229,8 +234,11 @@ function pickRandom () {
 }
 
 function displayScore (score) {
-    if (score == 'COFFEE') {
+    if (score == 'coffee') {
         $('#score').html('<i class="fa fa-coffee"></i>');
+    }
+    else if (score == 'question') {
+        $('#score').html('?');
     }
     else {
         $('#score').html(score);
@@ -242,11 +250,11 @@ function advanceScore (index, finalNumber, distance) {
     $('#score').css('opacity', distance);
 
     if (distance < 1) {
-        displayScore( scores[index] );
+        displayScore( Object.keys(scores)[index] );
 
         distance += 0.05;
         index++;
-        if (index > scores.length - 1) {
+        if (index > Object.keys(scores).length - 1) {
             index = 0;
         }
 
@@ -266,5 +274,9 @@ function advanceScore (index, finalNumber, distance) {
 }
 
 function pickRandomElementOfArray (array) {
-    return array[ Math.round(Math.random() * (array.length - 1)) ];
+    return array[ pickRandomIndexOfArray(array) ];
+}
+
+function pickRandomIndexOfArray (array) {
+    return Math.round(Math.random() * (array.length - 1))
 }

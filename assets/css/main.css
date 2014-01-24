@@ -38,6 +38,11 @@ hr {
     padding: 50px 10px 10px 10px;
 }
 
+.home-section {
+    width: 600px;
+    margin: 35px auto 0 auto;
+}
+
 .mike-image-head {
     z-index: 100;
     position: absolute;
@@ -80,8 +85,9 @@ hr {
     padding: 0 20px;
     text-align: left;
     position: absolute;
-    bottom: 20px;
+    bottom: 30px;
     width: 85%;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.2);
 }
 
 .mike-heard h2 {
@@ -91,6 +97,16 @@ hr {
 .mike-heard dt {
     font-weight: bold;
     font-style: italic;
+}
+
+.footer {
+    text-align: center;
+    padding-top: 15px;
+    color: white;
+}
+
+.nap-logo {
+    margin: 0 0 -2px 15px;
 }
 
 .button {
