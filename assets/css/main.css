@@ -47,24 +47,31 @@ hr {
     margin-bottom: 15px;
 }
 
+.mike-image {
+    position: absolute;
+    right: -50px;
+    top: 98px;
+    height: 502px;
+    width: 635px;
+}
+
 .mike-image-head {
     z-index: 100;
-    position: absolute;
-    right: 212px;
     bottom: 349px;
+    right: 212px;
+    position: absolute;
 }
 
 .mike-image-body {
     z-index: 100;
-    position: absolute;
-    right: 0;
     bottom: 0;
+    position: absolute;
 }
 
 .mike-bubble {
     position: absolute;
     width: 200px;
-    right: -100px;
+    right: -150px;
     top: 50px;
 }
 
@@ -159,7 +166,7 @@ hr {
 .ask-again-button {
     position: absolute;
     top: 130px;
-    right: 230px;
+    right: 130px;
     font-size:25px;
     line-height:60px;
     height:60px;
