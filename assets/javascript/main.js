@@ -1,6 +1,22 @@
 var finalScoreSize = 140;
 var scoreDelay = 25;
 var scores = {
+    '0' : {
+        "probability" : 0.01,
+        'quotes' : [
+            {
+                'dev' : '"I might spend this weekend watching Buffy."',
+                'po'  : '"Awesome!"'
+            },
+            {
+                'dev' : '"I might have to go for a burger when this ends."',
+                'po'  : '"Awesome!"',
+            }
+        ],
+        'speech' : [
+            1500
+        ]
+    },
     '1' : {
         "probability" : 0.06,
         'quotes' : [
@@ -54,7 +70,7 @@ var scores = {
         ]
     },
     '5' : {
-        "probability" : 0.24,
+        "probability" : 0.23,
         'quotes' : [
             {
                 'dev' : '"I hope I get that one."',
@@ -162,7 +178,7 @@ var scores = {
             }
         ],
         'speech' : [
-            2300
+            1000
         ]
     },
 };
@@ -229,8 +245,8 @@ function playSpeech (score) {
     );
 
     var soundURI = 'assets/sound/' + score + '_' + randomSpeech + '.mp3';
-    playSound(soundURI);
     console.log('playing sound: ' + soundURI);
+    playSound(soundURI);
 
     setTimeout(function () { $('#mike-head').resetKeyframe() }, scores[ score ].speech[ randomSpeech ]);
 }
@@ -253,6 +269,8 @@ function pickRandom () {
             break seekRanges;
         }
     }
+
+randomScore = 'coffee';
 
     setTimeout(function () { advanceScore(0, randomScore, 0.05) }, scoreDelay);
 
@@ -325,11 +343,15 @@ function html5Audio(){
 
 function playSound(url){
     if (html5Audio){
+        console.log('using html5 audio');
         var snd = new Audio(url);
+        snd.oncanplay = function () {
+            this.play();
+        };
         snd.load();
-        snd.play();
     }
     else {
+        console.log('using embed tag for audio');
         $("#sound").remove();
         var sound = $("<embed id='sound' type='audio/mpeg' />");
         sound.attr('src', url);
