@@ -27,6 +27,7 @@ hr {
 .mike-container {
     position: relative;
     background-image: -webkit-linear-gradient(top left, #ebfeff 0%, #ffffff 100%);
+    background-image: -moz-linear-gradient(top left, #ebfeff 0%, #ffffff 100%);
 }
 
 .content-container {
@@ -89,6 +90,7 @@ hr {
 
 .mike-heard {
     background-image: -webkit-linear-gradient(top left, #f8f8d0 0%, #f0f0c0 100%);
+    background-image: -moz-linear-gradient(top left, #f8f8d0 0%, #f0f0c0 100%);
     padding: 0 20px;
     text-align: left;
     position: absolute;
