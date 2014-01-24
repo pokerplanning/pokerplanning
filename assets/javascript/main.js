@@ -2,6 +2,7 @@ var finalScoreSize = 140;
 var scoreDelay = 25;
 var scores = {
     '1' : {
+        "probability" : 0.06,
         'quotes' : [
             {
                 'dev' : '"Easy."',
@@ -17,6 +18,7 @@ var scores = {
         ]
     },
     '2' : {
+        "probability" : 0.11,
         'quotes' : [
             {
                 'dev' : '"Just a case of munging some data."',
@@ -32,6 +34,7 @@ var scores = {
         ]
     },
     '3' : {
+        "probability" : 0.2,
         'quotes' : [
             {
                 'dev' : '"I wonder if we could get the PO to buy some Krispy Kremes?"',
@@ -51,6 +54,7 @@ var scores = {
         ]
     },
     '5' : {
+        "probability" : 0.24,
         'quotes' : [
             {
                 'dev' : '"I hope I get that one."',
@@ -74,6 +78,7 @@ var scores = {
         ]
     },
     '8' : {
+        "probability" : 0.18,
         'quotes' : [
             {
                 'dev' : '"A bit big, but not worth splitting."',
@@ -93,6 +98,7 @@ var scores = {
         ]
     },
     '13' : {
+        "probability" : 0.11,
         'quotes' : [
             {
                 'dev' : '"We should be able to break this down into 2 or 3 stories pretty easily."',
@@ -108,6 +114,7 @@ var scores = {
         ]
     },
     '20' : {
+        "probability" : 0.05,
         'quotes' : [
             {
                 'dev' : '"Does the PO not have any idea about the complexity of these requests?"',
@@ -123,6 +130,7 @@ var scores = {
         ]
     },
     'question' : {
+        "probability" : 0.03,
         'quotes' : [
             {
                 'dev' : '"What is the PO talking about? Right, stop thinking about Star Wars and concentrate."',
@@ -138,6 +146,7 @@ var scores = {
         ]
     },
     'coffee' : {
+        "probability" : 0.02,
         'quotes' : [
             {
                 'dev' : '"Pleeeeease let me out of this room!!!!!"',
@@ -157,6 +166,8 @@ var scores = {
         ]
     },
 };
+
+var scoresValues = Object.keys(scores);
 
 $(function () {
     $('#score-content').hide();
@@ -220,13 +231,29 @@ function playSpeech (score) {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'assets/sound/' + score + '_' + randomSpeech + '.mp3');
     audioElement.setAttribute('autoplay', 'autoplay');
-    console.log('assets/sound/' + score + '_' + randomSpeech + '.mp3');
+    console.log('playing sound: assets/sound/' + score + '_' + randomSpeech + '.mp3');
 
     setTimeout(function () { $('#mike-head').resetKeyframe() }, scores[ score ].speech[ randomSpeech ]);
 }
 
 function pickRandom () {
-    var randomScore = pickRandomElementOfArray( Object.keys(scores) );
+    var random = Math.random();
+    console.log('random: ' + random);
+
+    var upperRange = 0;
+    var randomScore;
+
+    seekRanges:
+    for (var i in scoresValues) {
+        upperRange += scores[ scoresValues[i] ].probability;
+        console.log('upperRange (for ' + scoresValues[i] + '): ' + upperRange);
+
+        if (random <= upperRange) {
+            randomScore = scoresValues[i];
+            console.log('randomScore: ' + randomScore);
+            break seekRanges;
+        }
+    }
 
     setTimeout(function () { advanceScore(0, randomScore, 0.05) }, scoreDelay);
 
@@ -250,11 +277,11 @@ function advanceScore (index, finalNumber, distance) {
     $('#score').css('opacity', distance);
 
     if (distance < 1) {
-        displayScore( Object.keys(scores)[index] );
+        displayScore( scoresValues[index] );
 
         distance += 0.05;
         index++;
-        if (index > Object.keys(scores).length - 1) {
+        if (index > scoresValues.length - 1) {
             index = 0;
         }
 
