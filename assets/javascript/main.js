@@ -240,10 +240,6 @@ $(function () {
 function playSpeech (score) {
     var randomSpeech = pickRandomIndexOfArray(scores[ score ].speech);
 
-    $('#mike-head').playKeyframe(
-        'speech 1000 linear 0 infinite normal forwards'
-    );
-
     var soundURI = 'assets/sound/' + score + '_' + randomSpeech + '.mp3';
     console.log('playing sound: ' + soundURI);
     playSound(soundURI);
@@ -269,8 +265,6 @@ function pickRandom () {
             break seekRanges;
         }
     }
-
-randomScore = 'coffee';
 
     setTimeout(function () { advanceScore(0, randomScore, 0.05) }, scoreDelay);
 
@@ -345,10 +339,13 @@ function playSound(url){
     if (html5Audio){
         console.log('using html5 audio');
         var snd = new Audio(url);
-        snd.oncanplay = function () {
-            this.play();
+        snd.onplaying = function () {
+            $('#mike-head').playKeyframe(
+                'speech 1000 linear 0 infinite normal forwards'
+            );
         };
         snd.load();
+        snd.play();
     }
     else {
         console.log('using embed tag for audio');
@@ -359,6 +356,10 @@ function playSound(url){
         sound.attr('hidden', true);
         sound.attr('autostart', true);
         $('body').append(sound);
+
+        $('#mike-head').playKeyframe(
+            'speech 1000 linear 0 infinite normal forwards'
+        );
     }
 }
 
