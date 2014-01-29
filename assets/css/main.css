@@ -28,6 +28,7 @@ hr {
     position: relative;
     background-image: -webkit-linear-gradient(top left, #ebfeff 0%, #ffffff 100%);
     background-image: -moz-linear-gradient(top left, #ebfeff 0%, #ffffff 100%);
+    overflow: hidden;
 }
 
 .content-container {
@@ -114,7 +115,7 @@ hr {
 }
 
 .nap-logo {
-    margin: 0 15px -2px 15px;
+    margin: 0 15px -4px 15px;
 }
 
 .footer small {
